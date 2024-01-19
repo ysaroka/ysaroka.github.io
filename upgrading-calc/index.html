@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<!-- saved from url=(0304)https://choobs.org/upgrade/expect.php?00DxcAeA2AgCaAgCandoandoandoanfXaxGBJafXbKbkbkaKaKaxaxaxaxaxaxaxaxaxaxaxaxGBJafXaxGIngngndtDtBDn5jkGCJkaKJajkGCJkaKJajkGCJkaKJajkGBJkJafXJkaxJkGBJkJafXJkaxJkGBJkJafXJkaxJkGBJkJajkJajkJajkJajkJajkJajkJajkJajkJajkJajkJafXJkaxJkGBJkJafXJkaxJkGBJkJafXJkaxJkGBJkJafXJk6b7 -->
+<html lang="es-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Калькулятор стоимости заточки вещей</title>
+
+<link rel="stylesheet" type="text/css" href="./files/upgrade.css">
+<script type="text/javascript" src="./files/jquery.min.js"></script>
+<script type="text/javascript" src="./files/sylvester.js"></script>
+<script type="text/javascript" src="./files/presets.js"></script>
+<script type="text/javascript" src="./files/expect.js"></script>
+</head>
+<body>
+
+<h1>Калькулятор стоимости заточки вещей</h1>
+
+<hr/>
+
+<h2>Инструкции:</h2>
+<ol>
+    <li>Выберите, какую руду использовать для диапазона или отдельно для каждого уровня улучшения в таблице.</li>
+    <li>Выберите пресет процентных шансов успеха и нажмите «Использовать», чтобы загрузить его. Вы можете ввести свои собственные значения в таблице, если хотите.</li>
+    <li>(Опционально) Введите стоимость улучшения в зени, если вас интересует средняя сумма потраченных зени и если на вашем сервере стоимость улучшения отличается от стандартной.</li>
+    <li>(Опционально) Если вы отметите галку «без риска», неудача не приведет к поломке оборудования или снижению уровня его улучшения. (Однако руда и зени все равно будут потребляться.) Это полезно для ответов на такие вопросы, как: «Что, если экипировка никогда не упадет ниже +10, +13, ...?»
+</ol>
+
+<hr/>
+
+<ul>
+<li><button id="p_s_set">Использовать</button>
+<select id="p_s">
+<option value="0">обычную</option>
+<option value="1">HD</option>
+<option value="2">обогащенную</option>
+</select>
+руду для заточки от <select id="p_s_from">
+<option value="0" selected="">+0</option><option value="1">+1</option><option value="2">+2</option><option value="3">+3</option><option value="4">+4</option><option value="5">+5</option><option value="6">+6</option><option value="7">+7</option><option value="8">+8</option><option value="9">+9</option><option value="10">+10</option><option value="11">+11</option><option value="12">+12</option><option value="13">+13</option><option value="14">+14</option><option value="15">+15</option><option value="16">+16</option><option value="17">+17</option><option value="18">+18</option><option value="19">+19</option></select> до <select id="p_s_to">
+<option value="1">+1</option><option value="2">+2</option><option value="3">+3</option><option value="4">+4</option><option value="5">+5</option><option value="6">+6</option><option value="7">+7</option><option value="8">+8</option><option value="9">+9</option><option value="10">+10</option><option value="11">+11</option><option value="12">+12</option><option value="13">+13</option><option value="14">+14</option><option value="15">+15</option><option value="16">+16</option><option value="17">+17</option><option value="18">+18</option><option value="19">+19</option><option value="20" selected="">+20</option></select></li>
+<li>
+<button id="p_r_set">Использовать</button> процентные шансы успеха для:
+<select id="p_r">
+<option value="prem_armor">брони</option>
+<option value="prem_lv1">оружия 1-го уровня</option>
+<option value="prem_lv2">оружия 2-го уровня</option>
+<option value="prem_lv3">оружия 3-го уровня</option>
+<option value="prem_lv4">оружия 4-го уровня</option>
+<!--
+<option value="free_armor">free, armor</option>
+<option value="free_lv1">free, lv1 weapon</option>
+<option value="free_lv2">free, lv2 weapon</option>
+<option value="free_lv3">free, lv3 weapon</option>
+<option value="free_lv4">free, lv4 weapon</option>
+-->
+</select>
+</li>
+</ul>
+
+<table id="param">
+<tbody><tr><th rowspan="2">уровень</th><th rowspan="2">улучшить используя руду...</th><th rowspan="2">без<br>риска</th><th colspan="2">процент успеха (%)</th><th colspan="2">стоимость в зени</th></tr>
+<tr><th>обычн./HD</th><th>обогащ.</th><th>обычн./обогащ.</th><th>HD</th></tr>
+<tr><td>+0 → +1</td><td><input type="radio" id="s0_0" name="s0" value="0"><label for="s0_0">обычную</label> <input type="radio" id="s0_1" name="s0" value="1"><label for="s0_1">HD</label> <input type="radio" id="s0_2" name="s0" value="2"><label for="s0_2">обогащенную</label></td><td><input type="checkbox" id="f0"></td><td><input class="num" type="text" id="r0r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r0e" maxlength="3" size="3"></td><td><input class="num" type="text" id="c0r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c0h" maxlength="6" size="6" value="0"></td></tr>
+<tr><td>+1 → +2</td><td><input type="radio" id="s1_0" name="s1" value="0"><label for="s1_0">обычную</label> <input type="radio" id="s1_1" name="s1" value="1"><label for="s1_1">HD</label> <input type="radio" id="s1_2" name="s1" value="2"><label for="s1_2">обогащенную</label></td><td><input type="checkbox" id="f1"></td><td><input class="num" type="text" id="r1r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r1e" maxlength="3" size="3"></td><td><input class="num" type="text" id="c1r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c1h" maxlength="6" size="6" value="0"></td></tr>
+<tr><td>+2 → +3</td><td><input type="radio" id="s2_0" name="s2" value="0"><label for="s2_0">обычную</label> <input type="radio" id="s2_1" name="s2" value="1"><label for="s2_1">HD</label> <input type="radio" id="s2_2" name="s2" value="2"><label for="s2_2">обогащенную</label></td><td><input type="checkbox" id="f2"></td><td><input class="num" type="text" id="r2r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r2e" maxlength="3" size="3"></td><td><input class="num" type="text" id="c2r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c2h" maxlength="6" size="6" value="0"></td></tr>
+<tr><td>+3 → +4</td><td><input type="radio" id="s3_0" name="s3" value="0"><label for="s3_0">обычную</label> <input type="radio" id="s3_1" name="s3" value="1"><label for="s3_1">HD</label> <input type="radio" id="s3_2" name="s3" value="2"><label for="s3_2">обогащенную</label></td><td><input type="checkbox" id="f3"></td><td><input class="num" type="text" id="r3r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r3e" maxlength="3" size="3"></td><td><input class="num" type="text" id="c3r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c3h" maxlength="6" size="6" value="0"></td></tr>
+<tr><td>+4 → +5</td><td><input type="radio" id="s4_0" name="s4" value="0"><label for="s4_0">обычную</label> <input type="radio" id="s4_1" name="s4" value="1"><label for="s4_1">HD</label> <input type="radio" id="s4_2" name="s4" value="2"><label for="s4_2">обогащенную</label></td><td><input type="checkbox" id="f4"></td><td><input class="num" type="text" id="r4r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r4e" maxlength="3" size="3"></td><td><input class="num" type="text" id="c4r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c4h" maxlength="6" size="6" value="0"></td></tr>
+<tr><td>+5 → +6</td><td><input type="radio" id="s5_0" name="s5" value="0"><label for="s5_0">обычную</label> <input type="radio" id="s5_1" name="s5" value="1"><label for="s5_1">HD</label> <input type="radio" id="s5_2" name="s5" value="2"><label for="s5_2">обогащенную</label></td><td><input type="checkbox" id="f5"></td><td><input class="num" type="text" id="r5r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r5e" maxlength="3" size="3"></td><td><input class="num" type="text" id="c5r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c5h" maxlength="6" size="6" value="0"></td></tr>
+<tr><td>+6 → +7</td><td><input type="radio" id="s6_0" name="s6" value="0"><label for="s6_0">обычную</label> <input type="radio" id="s6_1" name="s6" value="1"><label for="s6_1">HD</label> <input type="radio" id="s6_2" name="s6" value="2"><label for="s6_2">обогащенную</label></td><td><input type="checkbox" id="f6"></td><td><input class="num" type="text" id="r6r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r6e" maxlength="3" size="3"></td><td><input class="num" type="text" id="c6r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c6h" maxlength="6" size="6" value="0"></td></tr>
+<tr><td>+7 → +8</td><td><input type="radio" id="s7_0" name="s7" value="0"><label for="s7_0">обычную</label> <input type="radio" id="s7_1" name="s7" value="1"><label for="s7_1">HD</label> <input type="radio" id="s7_2" name="s7" value="2"><label for="s7_2">обогащенную</label></td><td><input type="checkbox" id="f7"></td><td><input class="num" type="text" id="r7r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r7e" maxlength="3" size="3"></td><td><input class="num" type="text" id="c7r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c7h" maxlength="6" size="6" value="0"></td></tr>
+<tr><td>+8 → +9</td><td><input type="radio" id="s8_0" name="s8" value="0"><label for="s8_0">обычную</label> <input type="radio" id="s8_1" name="s8" value="1"><label for="s8_1">HD</label> <input type="radio" id="s8_2" name="s8" value="2"><label for="s8_2">обогащенную</label></td><td><input type="checkbox" id="f8"></td><td><input class="num" type="text" id="r8r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r8e" maxlength="3" size="3"></td><td><input class="num" type="text" id="c8r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c8h" maxlength="6" size="6" value="0"></td></tr>
+<tr><td>+9 → +10</td><td><input type="radio" id="s9_0" name="s9" value="0"><label for="s9_0">обычную</label> <input type="radio" id="s9_1" name="s9" value="1"><label for="s9_1">HD</label> <input type="radio" id="s9_2" name="s9" value="2"><label for="s9_2">обогащенную</label></td><td><input type="checkbox" id="f9"></td><td><input class="num" type="text" id="r9r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r9e" maxlength="3" size="3"></td><td><input class="num" type="text" id="c9r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c9h" maxlength="6" size="6" value="0"></td></tr>
+<tr><td>+10 → +11</td><td><input type="radio" id="s10_0" name="s10" value="0"><label for="s10_0">обычную</label> <input type="radio" id="s10_1" name="s10" value="1"><label for="s10_1">HD</label> <input type="radio" id="s10_2" name="s10" value="2" disabled=""><label for="s10_2">обогащенную</label></td><td><input type="checkbox" id="f10"></td><td><input class="num" type="text" id="r10r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r10e" maxlength="3" size="3" disabled=""></td><td><input class="num" type="text" id="c10r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c10h" maxlength="6" size="6" value="0"></td></tr>
+<tr><td>+11 → +12</td><td><input type="radio" id="s11_0" name="s11" value="0"><label for="s11_0">обычную</label> <input type="radio" id="s11_1" name="s11" value="1"><label for="s11_1">HD</label> <input type="radio" id="s11_2" name="s11" value="2" disabled=""><label for="s11_2">обогащенную</label></td><td><input type="checkbox" id="f11"></td><td><input class="num" type="text" id="r11r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r11e" maxlength="3" size="3" disabled=""></td><td><input class="num" type="text" id="c11r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c11h" maxlength="6" size="6" value="0"></td></tr>
+<tr><td>+12 → +13</td><td><input type="radio" id="s12_0" name="s12" value="0"><label for="s12_0">обычную</label> <input type="radio" id="s12_1" name="s12" value="1"><label for="s12_1">HD</label> <input type="radio" id="s12_2" name="s12" value="2" disabled=""><label for="s12_2">обогащенную</label></td><td><input type="checkbox" id="f12"></td><td><input class="num" type="text" id="r12r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r12e" maxlength="3" size="3" disabled=""></td><td><input class="num" type="text" id="c12r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c12h" maxlength="6" size="6" value="0"></td></tr>
+<tr><td>+13 → +14</td><td><input type="radio" id="s13_0" name="s13" value="0"><label for="s13_0">обычную</label> <input type="radio" id="s13_1" name="s13" value="1"><label for="s13_1">HD</label> <input type="radio" id="s13_2" name="s13" value="2" disabled=""><label for="s13_2">обогащенную</label></td><td><input type="checkbox" id="f13"></td><td><input class="num" type="text" id="r13r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r13e" maxlength="3" size="3" disabled=""></td><td><input class="num" type="text" id="c13r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c13h" maxlength="6" size="6" value="0"></td></tr>
+<tr><td>+14 → +15</td><td><input type="radio" id="s14_0" name="s14" value="0"><label for="s14_0">обычную</label> <input type="radio" id="s14_1" name="s14" value="1"><label for="s14_1">HD</label> <input type="radio" id="s14_2" name="s14" value="2" disabled=""><label for="s14_2">обогащенную</label></td><td><input type="checkbox" id="f14"></td><td><input class="num" type="text" id="r14r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r14e" maxlength="3" size="3" disabled=""></td><td><input class="num" type="text" id="c14r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c14h" maxlength="6" size="6" value="0"></td></tr>
+<tr><td>+15 → +16</td><td><input type="radio" id="s15_0" name="s15" value="0"><label for="s15_0">обычную</label> <input type="radio" id="s15_1" name="s15" value="1"><label for="s15_1">HD</label> <input type="radio" id="s15_2" name="s15" value="2" disabled=""><label for="s15_2">обогащенную</label></td><td><input type="checkbox" id="f15"></td><td><input class="num" type="text" id="r15r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r15e" maxlength="3" size="3" disabled=""></td><td><input class="num" type="text" id="c15r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c15h" maxlength="6" size="6" value="0"></td></tr>
+<tr><td>+16 → +17</td><td><input type="radio" id="s16_0" name="s16" value="0"><label for="s16_0">обычную</label> <input type="radio" id="s16_1" name="s16" value="1"><label for="s16_1">HD</label> <input type="radio" id="s16_2" name="s16" value="2" disabled=""><label for="s16_2">обогащенную</label></td><td><input type="checkbox" id="f16"></td><td><input class="num" type="text" id="r16r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r16e" maxlength="3" size="3" disabled=""></td><td><input class="num" type="text" id="c16r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c16h" maxlength="6" size="6" value="0"></td></tr>
+<tr><td>+17 → +18</td><td><input type="radio" id="s17_0" name="s17" value="0"><label for="s17_0">обычную</label> <input type="radio" id="s17_1" name="s17" value="1"><label for="s17_1">HD</label> <input type="radio" id="s17_2" name="s17" value="2" disabled=""><label for="s17_2">обогащенную</label></td><td><input type="checkbox" id="f17"></td><td><input class="num" type="text" id="r17r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r17e" maxlength="3" size="3" disabled=""></td><td><input class="num" type="text" id="c17r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c17h" maxlength="6" size="6" value="0"></td></tr>
+<tr><td>+18 → +19</td><td><input type="radio" id="s18_0" name="s18" value="0"><label for="s18_0">обычную</label> <input type="radio" id="s18_1" name="s18" value="1"><label for="s18_1">HD</label> <input type="radio" id="s18_2" name="s18" value="2" disabled=""><label for="s18_2">обогащенную</label></td><td><input type="checkbox" id="f18"></td><td><input class="num" type="text" id="r18r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r18e" maxlength="3" size="3" disabled=""></td><td><input class="num" type="text" id="c18r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c18h" maxlength="6" size="6" value="0"></td></tr>
+<tr><td>+19 → +20</td><td><input type="radio" id="s19_0" name="s19" value="0"><label for="s19_0">обычную</label> <input type="radio" id="s19_1" name="s19" value="1"><label for="s19_1">HD</label> <input type="radio" id="s19_2" name="s19" value="2" disabled=""><label for="s19_2">обогащенную</label></td><td><input type="checkbox" id="f19"></td><td><input class="num" type="text" id="r19r" maxlength="3" size="3"></td><td><input class="num" type="text" id="r19e" maxlength="3" size="3" disabled=""></td><td><input class="num" type="text" id="c19r" maxlength="6" size="6" value="0"></td><td><input class="num" type="text" id="c19h" maxlength="6" size="6" value="0"></td></tr>
+</tbody></table>
+
+<p>
+<!--<label for="kp_hd">hd elu/ori kp:</label>-->
+<!--<input id="kp_hd" type="text" maxlength="3" size="3" value="10">-->
+<!--<label for="kp_hd_">hd bradium/carnium kp:</label>-->
+<!--<input id="kp_hd_" type="text" maxlength="3" size="3" value="15">-->
+<!--<label for="kp_enr">enriched elu/ori kp:</label>-->
+<!--<input id="kp_enr" type="text" maxlength="3" size="3" value="30"><br>-->
+
+Улучшить с:
+<select id="origin">
+<option value="0" selected="">+0</option><option value="1">+1</option><option value="2">+2</option><option value="3">+3</option><option value="4">+4</option><option value="5">+5</option><option value="6">+6</option><option value="7">+7</option><option value="8">+8</option><option value="9">+9</option><option value="10">+10</option><option value="11">+11</option><option value="12">+12</option><option value="13">+13</option><option value="14">+14</option><option value="15">+15</option><option value="16">+16</option><option value="17">+17</option><option value="18">+18</option><option value="19">+19</option></select>
+до
+<select id="target">
+<option value="1">+1</option><option value="2">+2</option><option value="3">+3</option><option value="4">+4</option><option value="5">+5</option><option value="6">+6</option><option value="7" selected="">+7</option><option value="8">+8</option><option value="9">+9</option><option value="10">+10</option><option value="11">+11</option><option value="12">+12</option><option value="13">+13</option><option value="14">+14</option><option value="15">+15</option><option value="16">+16</option><option value="17">+17</option><option value="18">+18</option><option value="19">+19</option><option value="20">+20</option></select>
+<button id="calc">Рассчитать</button>
+</p>
+
+<hr>
+
+<h2>Результаты:</h2>
+
+<table id="result">
+    <tbody>
+    <tr>
+        <th colspan="7">средние затраты</th>
+    </tr>
+    <tr>
+        <th colspan="2">обычной руды</th>
+        <th colspan="2">HD руды</th>
+        <th rowspan="2">обогащенной руды</th>
+        <th rowspan="2">штук экипировки</th>
+        <th rowspan="2">зени</th>
+    </tr>
+    <tr>
+        <th>≤ +10</th>
+        <th>≥ +11</th>
+        <th>≤ +10</th>
+        <th>≥ +11</th>
+    </tr>
+    </tbody>
+    <tbody id="resultdata">
+    <tr>
+        <td class="num">0</td>
+        <td class="num">0</td>
+        <td class="num">0</td>
+        <td class="num">0</td>
+        <td class="num">0</td>
+        <td class="num">0</td>
+        <td class="num">0</td>
+    </tr>
+    </tbody>
+</table>
+
+<!--<div id="resultparam"><p>(parameters for these results)</p>-->
+<!--<ul><li><b>goal:</b> +0 → +7</li><li><b>rates:</b> 100,100,100,100,60,40,40</li><li><b>ores:</b> reg,reg,reg,reg,hd,hd,hd</li><li><b>zeny:</b> 2000,2000,2000,2000,20000,20000,20000</li><li><b>kp cost:</b> hd elu/ori = 0; hd bradium/carnium = 0; enriched elu/ori = 15</li></ul>-->
+<!--</div>-->
+
+<!--<p style="display: block;"><label for="resultsave">link to these calculations:</label>-->
+<!--<input id="resultsave" type="text" readonly="" size="100" onfocus="this.select();"></p>-->
+
+<br/>
+
+</body></html>
