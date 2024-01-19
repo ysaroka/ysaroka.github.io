@@ -61,6 +61,12 @@
 
 	</head>
     <body>
+    	<style>
+    		.hide {
+    			display: none;
+    		}
+    	</style>
+
     	<form name="calcForm" action="https://calc.irowiki.org/(EmptyReference!)">
 	        <!-- header -->
 		<div class="bgLgTitle lgTitle"><a href="https://irowiki.org/">iW</a> Stat Simulator (200 level)</div>
@@ -111,7 +117,7 @@
 	                    </td>
 	                </tr>
 	                <tr>
-	                    <td class="bgLtRow4 padded optCaption">
+	                    <td class="bgLtRow4 padded optCaption hide">
 	                    	<input name="URLLOAD" value="Load a PVP enemy from URL" onclick="getEnemyFromURL()" type="button">
 	                    	<input name="URL_LOAD" size="110" type="text">
 	                    </td>
@@ -353,11 +359,11 @@
                 </div>
 
 	            <!-- equipment -->
-	            <div class="bgMdTitle mdTitle" onclick="ToggleVisibility(&#39;equipment&#39;)">Equipment</div>
+	            <div class="bgMdTitle mdTitle hide" onclick="ToggleVisibility(&#39;equipment&#39;)">Equipment</div>
                 <div id="equipment" style="display:block">
 	            <table class="bgDkTable">
 	                <tbody><tr>
-	                    <td class="bgDkRow1 padded">
+	                    <td class="bgDkRow1 padded hide">
 	                        The weapons, armor, and accessories you wear.
 	                    </td>
 			    </tr>
@@ -370,10 +376,10 @@
 				    <table>
 					<tbody>
 					    <tr>
-						<td style="width: 33%; vertical-align: top;">
+						<td style="width: 33%; vertical-align: top;" class="hide">
 						<!--Right Weapon-->
-						    <div class="bgSmTitle smTitle">Main Weapon (right hand)</div>
-						    <table class="bgLtTable">
+						    <div class="bgSmTitle smTitle hide">Main Weapon (right hand)</div>
+						    <table class="bgLtTable hide">
 							<tbody>
 								<tr>
 								    <td class="bgLtRow3 padded optCaption">Weapon Type</td>
@@ -500,10 +506,10 @@
 							</table>
 						    </div>
 						</td>
-						<td style="width: 66%; vertical-align: top;" colspan="2">
-						    <div class="bgSmTitle smTitle">Armor</div>
+						<td style="width: 100%; vertical-align: top;" colspan="2">
+						    <div class="bgSmTitle smTitle hide">Armor</div>
 						    <!--Armor-->
-						    <table class="bgLtTable">
+						    <table class="bgLtTable hide">
 							<tbody>
 							    <tr>
 								<td class="bgLtRow1 padded optArea">
@@ -603,9 +609,9 @@
 							</tbody>
 						    </table>
 						    <div class="mdSeperator">&nbsp;</div>
-						    <div class="bgSmTitle smTitle">Item Description&nbsp;-&nbsp;<span id="nm080">Ancient Dagger</span></div>
+						    <div class="bgSmTitle smTitle hide">Item Description&nbsp;-&nbsp;<span id="nm080">Ancient Dagger</span></div>
 						<!--item descriptions-->
-						    <table class="bgLtTable">
+						    <table class="bgLtTable hide">
 							<tbody>
 							    <tr>
 								<td id="ITEM0" class="bgLtRow4 padded optCaption" width="13%">ATK</td>
@@ -625,7 +631,7 @@
 							</tbody>
 						    </table>
 						    <div class="mdSeperator">&nbsp;</div>
-						    <div class="bgSmTitle smTitle">Additional Enchants&nbsp;-&nbsp;(Mora enchants, LVL4 weapons, custom ones)</div>
+						    <div class="bgSmTitle smTitle">Additional Enchants</div>
 						    <table class="bgLtTable">
 							 <tbody>
 							    <tr>
@@ -1119,7 +1125,7 @@
                 </div>
 
 	            <!-- Monster Combat Simulation -->
-	            <div class="bgMdTitle mdTitle" onclick="ToggleVisibility(&#39;monsterCombat&#39;)">Monster Combat Simulation</div>
+	            <div class="bgMdTitle mdTitle hide" onclick="ToggleVisibility(&#39;monsterCombat&#39;)">Monster Combat Simulation</div>
                 <div id="monsterCombat" style="display:none">
 	            <table class="bgDkTable">
 	                <tbody><tr>
