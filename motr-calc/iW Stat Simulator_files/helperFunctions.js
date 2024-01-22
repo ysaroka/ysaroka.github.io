@@ -554,7 +554,7 @@ function AdjustJobLevelList( job )
     }
     else if ( cls_RUN <= job && job <= cls_GENt )
     {
-        maxJobLvl = 65;
+        maxJobLvl = 70;
     }
     else
     {
