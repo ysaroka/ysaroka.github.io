@@ -65,6 +65,11 @@
     		.hide {
     			display: none;
     		}
+
+    		.job-bonuses-toggler {
+    			text-decoration: underline dotted;
+    			cursor: pointer;
+    		}
     	</style>
 
     	<form name="calcForm" action="https://calc.irowiki.org/(EmptyReference!)">
@@ -80,18 +85,28 @@
 	            		<td class="bgLtRow3 padded optCaption">
 							Калькулятор характеристик iRO Wiki (<a href="https://calc.irowiki.org/" target="_blank">calc.irowiki.org</a>), адаптированный под 200-й уровень и 70 job-уровень сервера MOTR.
 							<br />
-							<br />
-							Касательно job-бонусов 60+.
-							<br />
-							На данный момент нет информации по бонусам, получаемым на каждом job-уровне, но есть информация о финальных бонусах на 70-м, поэтому все бонусы 60+ применяются на 70-м уровне.
-							<br />
-							Информация о финальных бонусах была получена от игроков и проверена дважды, однако не стоит исключать вероятность, что она может быть неточной.
-							<br />
-							В случае обнаружения каких-либо несоответствий стучать в телеграм <a href="https://t.me/johnkind" target="_blank">@johnkind</a>.
-		            	</td>
-		            </tr>
-	            </tbody></table>
-	            </div>
+							<a href="javascript:void(0)" class="job-bonuses-toggler" onclick="toggleJobBonusesDescription()">Касательно job-бонусов 60+</a>
+							<div id="job-bonuses-description" class="hide">
+								На данный момент нет информации по бонусам, получаемым на каждом job-уровне, но есть информация о финальных бонусах на 70-м, поэтому все бонусы 60+ применяются на 70-м уровне.
+								<br />
+								Информация о финальных бонусах была получена от игроков и проверена дважды, однако не стоит исключать вероятность, что она может быть неточной.
+								<br />
+								В случае обнаружения каких-либо несоответствий стучать в телеграм <a href="https://t.me/johnkind" target="_blank">@johnkind</a>.
+							</div>
+							<script>
+								function toggleJobBonusesDescription() {
+									var descriptionDiv = document.getElementById('job-bonuses-description');
+									if (descriptionDiv.style.display === 'none' || descriptionDiv.style.display === '') {
+									  descriptionDiv.style.display = 'block';
+									} else {
+									  descriptionDiv.style.display = 'none';
+									}
+								}
+							</script>
+						</td>
+					</tr>
+				</tbody></table>
+				</div>
 
 	        	<!-- save area -->
 	        	<div class="bgMdTitle mdTitle" onclick="ToggleVisibility(&#39;savearea&#39;)">Save</div>
