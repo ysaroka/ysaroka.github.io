@@ -391,7 +391,7 @@ function defReduction(Def)
 
 function mdefReduction( MDef )
 {
-    return( (850 + MDef) / (850 + MDef * 10) );
+    return( (1850 + MDef) / (1850 + MDef * 10) );
 }
 
 var ExpMod = [0.4, 1.15, 1.2, 1.25, 1.3, 1.35, 1.4, 1.35, 1.3, 1.25, 1.2, 1.15, 1.1, 1.05, 1, 0.95, 0.9, 0.85, 0.6, 0.35, 0.1];
