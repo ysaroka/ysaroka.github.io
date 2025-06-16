@@ -1,16 +1,16 @@
 { // AdditionalInfoList (top-right) [KAKUTYOU_NAME]
 EXTENDED_INFO_NAME = [
  [0,"","-"]
-,[1,"","Heal Amount"]
-,[2,"","Increased HP Recovery"]
-,[3,"","Increased SP Recovery"]
-,[4,"","Weight Limit"]
-,[5,"","Element Resistance Multipliers"]
-,[6,"","Race Resistance"]
-,[7,"","Status Resistance"]
-,[8,"","Others Resistance"]
 ,[9,"","Cast and Delay"]
-,[10,"","Experience Calculator"]
+,[4,"","Weight Limit"]
+// ,[1,"","Heal Amount"]
+// ,[2,"","Increased HP Recovery"]
+// ,[3,"","Increased SP Recovery"]
+// ,[5,"","Element Resistance Multipliers"]
+// ,[6,"","Race Resistance"]
+// ,[7,"","Status Resistance"]
+// ,[8,"","Others Resistance"]
+//,[10,"","Experience Calculator"]
 ];
 }
 

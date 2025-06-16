@@ -2535,6 +2535,8 @@ function Init()
 		{ // ExtendedInfoList
 			formElements["ExtendedInfo"].options[i] = new Option( EXTENDED_INFO_NAME[i][1 + Language], EXTENDED_INFO_NAME[i][0] );
 		}
+		formElements["ExtendedInfo"].value = "9";
+
 		for(var i=0;i<SORT_NAME.length;i++) // EnemySortList
 			document.calcForm.ENEMY_SORT.options[i] = new Option(SORT_NAME[i][Language],i);
 		for(var i=0;i<MAP_NAME.length;i++) // MapList
